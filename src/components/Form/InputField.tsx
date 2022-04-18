@@ -5,6 +5,7 @@ interface InputFieldProps {
 	label: string;
 	type?: 'text' | 'email' | 'password';
 	className?: string;
+	error?: string;
 	registration: Partial<UseFormRegisterReturn>;
 }
 
@@ -13,6 +14,7 @@ const InputField = ({
 	label,
 	className,
 	registration,
+	error,
 }: InputFieldProps) => {
 	return (
 		<div>
@@ -27,6 +29,15 @@ const InputField = ({
 				)}
 				{...registration}
 			/>
+			{error && (
+				<div
+					role="alert"
+					aria-label={error}
+					className="text-sm font-semibold text-red-500"
+				>
+					{error}
+				</div>
+			)}
 		</div>
 	);
 };
