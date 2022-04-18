@@ -24,7 +24,7 @@ I have to use craco to override the tsconfig of CRA, otherwise the absolute path
 
 ## Styles
 
-- HeadlessUI
+- HeadlessUI (work perfectly with TailwindCSS)
 - TailwindCSS
 
 ## Form and validation
