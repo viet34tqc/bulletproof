@@ -2,8 +2,9 @@ import InputField from '@/components/Form/InputField';
 import AuthLayout from '@/features/auth/components/AuthLayout';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import { loginUser } from '../api/login';
 
 export interface LoginValues {
 	email: string;
@@ -16,6 +17,8 @@ const schema = yup.object({
 });
 
 const Login = () => {
+	const navigate = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
@@ -24,8 +27,9 @@ const Login = () => {
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = (data: LoginValues) => {
-		console.log('data', data);
+	const onSubmit = async (data: LoginValues) => {
+		await loginUser(data);
+		navigate('/dashboard');
 	};
 
 	return (
