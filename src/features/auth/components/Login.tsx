@@ -1,10 +1,10 @@
 import InputField from '@/components/Form/InputField';
+import { useAuth } from '@/context/AuthContext';
 import AuthLayout from '@/features/auth/components/AuthLayout';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { loginUser } from '../api/login';
 
 export interface LoginValues {
 	email: string;
@@ -18,7 +18,7 @@ const schema = yup.object({
 
 const Login = () => {
 	const navigate = useNavigate();
-
+	const { login } = useAuth();
 	const {
 		register,
 		handleSubmit,
@@ -28,8 +28,8 @@ const Login = () => {
 	});
 
 	const onSubmit = async (data: LoginValues) => {
-		await loginUser(data);
-		navigate('/dashboard');
+		await login(data);
+		//navigate('/dashboard');
 	};
 
 	return (

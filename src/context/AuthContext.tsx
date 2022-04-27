@@ -1,0 +1,166 @@
+import { getUser } from '@/features/auth/api/getUser';
+import { LoginCredentialsDTO, loginUser } from '@/features/auth/api/login';
+import {
+	RegisterCredentialsDTO,
+	registerUser,
+} from '@/features/auth/api/register';
+import { AuthUser, UserResponse } from '@/features/auth/types';
+import storage from '@/utils/storage';
+import React, { createContext, useContext } from 'react';
+import {
+	QueryObserverResult,
+	RefetchOptions,
+	UseMutateAsyncFunction,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from 'react-query';
+
+interface AuthContextValues {
+	user: AuthUser | null | undefined;
+	login: UseMutateAsyncFunction<AuthUser, any, LoginCredentialsDTO>;
+	logout: UseMutateAsyncFunction<any, any, void, any>;
+	register: UseMutateAsyncFunction<AuthUser, any, RegisterCredentialsDTO>;
+	isLoggingIn: boolean;
+	isLoggingOut: boolean;
+	isRegistering: boolean;
+	refetchUser: (
+		options?: RefetchOptions | undefined
+	) => Promise<QueryObserverResult<AuthUser | null, unknown>>;
+	error: unknown;
+}
+
+export interface AuthProviderProps {
+	children: React.ReactNode;
+}
+
+export const AuthContext = createContext<AuthContextValues | null>(null);
+
+const AuthContextProvider = ({ children }: AuthProviderProps) => {
+	const queryClient = useQueryClient(); // returns the current QueryClient instance created in AppProvider.
+	const queryKey = 'auth-user';
+
+	// This is much like setUser using setState,
+	// but instead of saving the user in the state, we are saving it using useQuery with a key
+	// This query runs every time the app is mounted.
+	// If the token is saved before (when you login or register), it will return that user.
+	const {
+		data: user,
+		error,
+		status,
+		isLoading,
+		isIdle,
+		isSuccess,
+		refetch,
+	} = useQuery({
+		queryKey,
+		queryFn: loadUser,
+	});
+	async function loadUser() {
+		if (storage.getToken()) {
+			const data = await getUser();
+			return data;
+		}
+		return null;
+	}
+
+	const setUser = React.useCallback(
+		(data: AuthUser) => queryClient.setQueryData(queryKey, data),
+		[queryClient]
+	);
+
+	async function setUserToken(data: UserResponse) {
+		const { jwt, user } = data;
+		storage.setToken(jwt);
+		return user;
+	}
+
+	async function loginFn(data: LoginCredentialsDTO) {
+		const response = await loginUser(data);
+		const user = await setUserToken(response);
+		return user;
+	}
+
+	async function registerFn(data: RegisterCredentialsDTO) {
+		const response = await registerUser(data);
+		const user = await setUserToken(response);
+		return user;
+	}
+
+	async function logoutFn() {
+		storage.clearToken();
+		window.location.assign(window.location.origin as unknown as string);
+	}
+
+	const loginMutation = useMutation({
+		mutationFn: loginFn,
+		onSuccess: user => {
+			setUser(user);
+		},
+	});
+
+	const registerMutation = useMutation({
+		mutationFn: registerFn,
+		onSuccess: user => {
+			setUser(user);
+		},
+	});
+
+	const logoutMutation = useMutation({
+		mutationFn: logoutFn,
+		onSuccess: () => {
+			queryClient.clear();
+		},
+	});
+
+	const value = React.useMemo(
+		() => ({
+			user,
+			error,
+			refetchUser: refetch,
+			login: loginMutation.mutateAsync,
+			isLoggingIn: loginMutation.isLoading,
+			logout: logoutMutation.mutateAsync,
+			isLoggingOut: logoutMutation.isLoading,
+			register: registerMutation.mutateAsync,
+			isRegistering: registerMutation.isLoading,
+		}),
+		[
+			user,
+			error,
+			refetch,
+			loginMutation.mutateAsync,
+			loginMutation.isLoading,
+			logoutMutation.mutateAsync,
+			logoutMutation.isLoading,
+			registerMutation.mutateAsync,
+			registerMutation.isLoading,
+		]
+	);
+
+	if (isSuccess) {
+		return (
+			<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+		);
+	}
+
+	if (isLoading || isIdle) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return (
+			<div style={{ color: 'tomato' }}>{JSON.stringify(error, null, 2)}</div>
+		);
+	}
+
+	return <div>Unhandled status: {status}</div>;
+};
+export default AuthContextProvider;
+export const useAuth = () => {
+	const context = useContext(AuthContext) as AuthContextValues;
+	if (context === undefined) {
+		throw new Error('useSomething must be used within a SomethingProvider');
+	}
+	return context;
+};

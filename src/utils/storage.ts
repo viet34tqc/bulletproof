@@ -1,4 +1,4 @@
-const storagePrefix = 'bullet';
+const storagePrefix = 'bullet_';
 
 const storage = {
 	getToken: () => {

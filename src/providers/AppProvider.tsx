@@ -1,13 +1,23 @@
-import React from 'react';
+import AuthContextProvider from '@/context/AuthContext';
+import React, { Suspense } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 
-type Props = {};
+type AppProviderProps = {
+	children: React.ReactNode;
+};
 
-const AppProvider = ({ children }: any) => {
+const queryClient = new QueryClient();
+
+const AppProvider = ({ children }: AppProviderProps) => {
 	return (
-		<React.Suspense fallback={<div>...</div>}>
-			<BrowserRouter>{children}</BrowserRouter>
-		</React.Suspense>
+		<Suspense fallback={<div>...</div>}>
+			<QueryClientProvider client={queryClient}>
+				<AuthContextProvider>
+					<BrowserRouter>{children}</BrowserRouter>
+				</AuthContextProvider>
+			</QueryClientProvider>
+		</Suspense>
 	);
 };
 

@@ -43,3 +43,11 @@ Remember to run npx msw init ./public --save to create mockServiceWorker file.
 - Create Homepage
 - Create Register and Login page and Layout (Layout is the common layout of register and login page). We still do nothing with the authentication yet.
 - Do authentication
+
+## Authentication
+
+User login or register => If success, a token is assigned and saved in localStorage => User is navigate to the dashboard.
+
+If the user refresh the page or go to other page, the app will check if the user is logged in and he can use this token for authentication.
+
+AuthContext will always run first, so does the query for loading user. It's this query to check if the user is logged in.
