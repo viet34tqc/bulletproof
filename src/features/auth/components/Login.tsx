@@ -1,3 +1,4 @@
+import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
 import { useAuth } from '@/context/AuthContext';
 import AuthLayout from '@/features/auth/components/AuthLayout';
@@ -18,7 +19,7 @@ const schema = yup.object({
 
 const Login = () => {
 	const navigate = useNavigate();
-	const { login } = useAuth();
+	const { login, isLoggingIn } = useAuth();
 	const {
 		register,
 		handleSubmit,
@@ -48,12 +49,9 @@ const Login = () => {
 					error={errors.password?.message}
 				/>
 
-				<button
-					type="submit"
-					className="flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none bg-blue-600 text-white hover:bg-gray-50:text-blue-600 py-2 px-6 text-md w-full"
-				>
-					<span className="mx-2">Log in</span>
-				</button>
+				<Button isLoading={isLoggingIn} type="submit" className="w-full">
+					Log in
+				</Button>
 			</form>
 
 			<div className="flex justify-end mt-4">
