@@ -5,6 +5,7 @@ import AuthLayout from '@/features/auth/components/AuthLayout';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 export interface LoginValues {
@@ -19,7 +20,7 @@ const schema = yup.object({
 
 const Login = () => {
 	const navigate = useNavigate();
-	const { login, isLoggingIn } = useAuth();
+	const { loginMutation, isLoggingIn } = useAuth();
 	const {
 		register,
 		handleSubmit,
@@ -29,8 +30,14 @@ const Login = () => {
 	});
 
 	const onSubmit = async (data: LoginValues) => {
-		await login(data);
-		//navigate('/dashboard');
+		loginMutation.mutate(data, {
+			onSuccess: () => {
+				navigate('/dashboard');
+			},
+			onError: (error: any) => {
+				toast(error.response.data.message);
+			},
+		});
 	};
 
 	return (

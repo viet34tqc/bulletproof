@@ -1,12 +1,14 @@
+import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
+import { useAuth } from '@/context/AuthContext';
 import AuthLayout from '@/features/auth/components/AuthLayout';
 import { Switch } from '@headlessui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
-import { registerUser } from '../api/register';
 
 export interface RegisterValues {
 	email: string;
@@ -25,6 +27,7 @@ const schema = yup.object({
 const Register = () => {
 	const [chooseTeam, setChooseTeam] = useState(false);
 	const navigate = useNavigate();
+	const { isRegistering, registerMutation } = useAuth();
 	const {
 		register,
 		handleSubmit,
@@ -34,8 +37,14 @@ const Register = () => {
 	});
 
 	const onSubmit = async (data: RegisterValues) => {
-		await registerUser(data);
-		navigate('/dashboard');
+		registerMutation.mutate(data, {
+			onSuccess: () => {
+				navigate('/dashboard');
+			},
+			onError: (error: any) => {
+				toast(error.response.data.message);
+			},
+		});
 	};
 
 	return (
@@ -85,12 +94,9 @@ const Register = () => {
 					</div>
 				</Switch.Group>
 
-				<button
-					type="submit"
-					className="flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none bg-blue-600 text-white hover:bg-gray-50:text-blue-600 py-2 px-6 text-md w-full"
-				>
-					<span className="mx-2">Register</span>
-				</button>
+				<Button isLoading={isRegistering} type="submit" className="w-full">
+					Register
+				</Button>
 			</form>
 
 			<div className="flex justify-end mt-4">

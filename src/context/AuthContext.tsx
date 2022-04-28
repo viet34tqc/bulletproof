@@ -1,3 +1,4 @@
+import Spinner from '@/components/Spinner/Spinner';
 import { getUser } from '@/features/auth/api/getUser';
 import { LoginCredentialsDTO, loginUser } from '@/features/auth/api/login';
 import {
@@ -10,17 +11,17 @@ import React, { createContext, useContext } from 'react';
 import {
 	QueryObserverResult,
 	RefetchOptions,
-	UseMutateAsyncFunction,
 	useMutation,
+	UseMutationResult,
 	useQuery,
 	useQueryClient,
 } from 'react-query';
 
 interface AuthContextValues {
 	user: AuthUser | null | undefined;
-	login: UseMutateAsyncFunction<AuthUser, any, LoginCredentialsDTO>;
-	logout: UseMutateAsyncFunction<any, any, void, any>;
-	register: UseMutateAsyncFunction<AuthUser, any, RegisterCredentialsDTO>;
+	loginMutation: UseMutationResult<AuthUser, any, LoginCredentialsDTO>;
+	logoutMutation: UseMutationResult<any, any, void, any>;
+	registerMutation: UseMutationResult<AuthUser, any, RegisterCredentialsDTO>;
 	isLoggingIn: boolean;
 	isLoggingOut: boolean;
 	isRegistering: boolean;
@@ -118,22 +119,22 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 			user,
 			error,
 			refetchUser: refetch,
-			login: loginMutation.mutateAsync,
+			loginMutation,
 			isLoggingIn: loginMutation.isLoading,
-			logout: logoutMutation.mutateAsync,
+			logoutMutation,
 			isLoggingOut: logoutMutation.isLoading,
-			register: registerMutation.mutateAsync,
+			registerMutation,
 			isRegistering: registerMutation.isLoading,
 		}),
 		[
 			user,
 			error,
 			refetch,
-			loginMutation.mutateAsync,
+			loginMutation,
 			loginMutation.isLoading,
-			logoutMutation.mutateAsync,
+			logoutMutation,
 			logoutMutation.isLoading,
-			registerMutation.mutateAsync,
+			registerMutation,
 			registerMutation.isLoading,
 		]
 	);
@@ -145,7 +146,11 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 	}
 
 	if (isLoading || isIdle) {
-		return <div>Loading...</div>;
+		return (
+			<div className="w-screne h-screen grid place-items-center">
+				<Spinner size="xl" />
+			</div>
+		);
 	}
 
 	if (error) {
@@ -154,7 +159,11 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 		);
 	}
 
-	return <div>Unhandled status: {status}</div>;
+	return (
+		<div className="h-screen w-screen grid place-items-center">
+			Unhandled status: {status}
+		</div>
+	);
 };
 export default AuthContextProvider;
 export const useAuth = () => {
