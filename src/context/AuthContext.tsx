@@ -126,17 +126,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 			registerMutation,
 			isRegistering: registerMutation.isLoading,
 		}),
-		[
-			user,
-			error,
-			refetch,
-			loginMutation,
-			loginMutation.isLoading,
-			logoutMutation,
-			logoutMutation.isLoading,
-			registerMutation,
-			registerMutation.isLoading,
-		]
+		[user, error, refetch, loginMutation, logoutMutation, registerMutation]
 	);
 
 	if (isSuccess) {

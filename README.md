@@ -6,9 +6,16 @@ This is the simplified version of the famous bulletproof-react. I rewrite it jus
 
 I have to use craco to override the webpack.config.js of CRA, otherwise the absolute path won't work (This only happens when you use CRA v5)
 
+## Difference from bulletproof-react
+
+- Routes: I decided to seperate routes into 3 categories instead of 2: authentication routes, protected routes and public routes (which can be homepage, blog...)
+- Use `mutation` instead of `mutationAync` to handle the POST request (login, register). For more details: <https://tkdodo.eu/blog/mastering-mutations-in-react-query>
+- Using react-toastify instead of storing the error into global state
+- Packages are up to date: CRA 5, Tailwind CSS 3.
+
 ## API
 
-This repo using msw and mswjs/data to mock up a server. Unfortunately, these two packages won't work well with CRA 5 because CRA 5 has removed polyfill of some module, such as 'http', 'https', 'stream'...So, I need to install those polifills package as the error instruction and set it up in the craco.config.js (which is used to override CRA webpack.config.js)
+This repo using msw and mswjs/data to mock up a server. Unfortunately, these two packages won't work well with CRA 5 because CRA 5 has removed polyfill of some modules, such as 'http', 'https', 'stream'...So, I need to install those polifills package as the error instruction and set it up in the craco.config.js (which is used to override CRA webpack.config.js)
 
 Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 
@@ -31,6 +38,7 @@ Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 ## Styles
 
 - HeadlessUI (work perfectly with TailwindCSS)
+- HeroIcons
 - TailwindCSS
 
 ## Form and validation
