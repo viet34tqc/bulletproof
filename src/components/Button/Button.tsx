@@ -39,8 +39,8 @@ const Button = ({
 			)}
 			{...props}
 		>
-			{isLoading && <Spinner size="sm" className="text-current" />}
-			<span className="mx-2">{props.children}</span>
+			{isLoading && <Spinner size="sm" className="text-current mr-2" />}
+			{props.children}
 		</button>
 	);
 };
