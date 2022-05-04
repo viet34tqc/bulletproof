@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-type Props = {};
-
-const Auth = (props: Props) => {
+const Auth = () => {
 	return <Outlet />;
 };
 

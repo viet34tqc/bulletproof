@@ -1,7 +1,7 @@
 import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
 import { useAuth } from '@/context/AuthContext';
-import AuthLayout from '@/features/auth/components/AuthLayout';
+import AuthLayout from '@/features/Auth/components/AuthLayout';
 import { Switch } from '@headlessui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';

@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
-const Auth = lazy(() => import('@/features/auth/Auth'));
-const Login = lazy(() => import('@/features/auth/components/Login'));
-const Register = lazy(() => import('@/features/auth/components/Register'));
+const Auth = lazy(() => import('@/features/Auth/Auth'));
+const Login = lazy(() => import('@/features/Auth/pages/Login/Login'));
+const Register = lazy(() => import('@/features/Auth/pages/Register/Register'));
 
 export const authRoutes = [
 	{

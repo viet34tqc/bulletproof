@@ -1,11 +1,11 @@
 import Spinner from '@/components/Spinner/Spinner';
-import { getUser } from '@/features/auth/api/getUser';
-import { LoginCredentialsDTO, loginUser } from '@/features/auth/api/login';
+import { getUser } from '@/features/Auth/api/getUser';
+import { LoginCredentialsDTO, loginUser } from '@/features/Auth/api/login';
 import {
 	RegisterCredentialsDTO,
 	registerUser,
-} from '@/features/auth/api/register';
-import { AuthUser, UserResponse } from '@/features/auth/types';
+} from '@/features/Auth/api/register';
+import { AuthUser, UserResponse } from '@/features/Auth/types';
 import storage from '@/utils/storage';
 import React, { createContext, useContext } from 'react';
 import {
