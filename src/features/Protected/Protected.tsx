@@ -1,10 +1,9 @@
 import { useAuth } from '@/context/AuthContext';
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import DashboardLayout from './components/DashboardLayout';
 
-type Props = {};
-
-const Dashboard = (props: Props) => {
+const Protected = () => {
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
@@ -14,10 +13,10 @@ const Dashboard = (props: Props) => {
 		}
 	}, [user]);
 	return (
-		<div>
+		<DashboardLayout>
 			<Outlet />
-		</div>
+		</DashboardLayout>
 	);
 };
 
-export default Dashboard;
+export default Protected;
