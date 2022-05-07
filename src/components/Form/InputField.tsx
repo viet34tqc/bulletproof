@@ -1,7 +1,8 @@
 import clsx from 'clsx';
+import { InputHTMLAttributes } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-interface InputFieldProps {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string;
 	type?: 'text' | 'email' | 'password';
 	className?: string;

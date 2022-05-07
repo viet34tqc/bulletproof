@@ -1,6 +1,8 @@
 import Button from '@/components/Button/Button';
+import Drawer from '@/components/Drawer/Drawer';
 import { useAuth } from '@/context/AuthContext';
 import { PencilIcon } from '@heroicons/react/outline';
+import ProfileForm from './components/ProfileForm';
 
 const Profile = () => {
 	const { user } = useAuth();
@@ -15,10 +17,17 @@ const Profile = () => {
 							Personal details of the user.
 						</p>
 					</div>
-					<Button className="text-[14px]">
-						<PencilIcon width={14} />
-						Update Profile
-					</Button>
+					<Drawer
+						title="Update Profile"
+						triggerButton={
+							<Button className="text-[14px]">
+								<PencilIcon width={14} />
+								Update Profile
+							</Button>
+						}
+					>
+						<ProfileForm />
+					</Drawer>
 				</header>
 				<div>
 					<ProfileRow name="First Name" value={user?.firstName} />
