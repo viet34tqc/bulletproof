@@ -9,7 +9,7 @@ interface DrawerProps {
 }
 
 const Drawer = ({ title, triggerButton, children }: DrawerProps) => {
-	// I want to use the useReducer here to toggle, however the clicking outside the panel trigger toggle function 2 times.
+	// I want to use the useReducer here to toggle, however clicking outside the panel triggers toggle function 2 times.
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (

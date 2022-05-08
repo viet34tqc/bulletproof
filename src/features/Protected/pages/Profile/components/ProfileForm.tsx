@@ -1,5 +1,6 @@
 import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
+import TextareaField from '@/components/Form/TextareaField';
 import { useAuth } from '@/context/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -45,7 +46,7 @@ const ProfileForm = ({
 	const onSubmit = async (data: ProfileValues) => {
 		updateProfile.mutate(data, {
 			onSuccess() {
-				setIsOpen(false);
+				setIsOpen && setIsOpen(false);
 				toast('Successfully update');
 			},
 			onError: (error: any) => {
@@ -73,7 +74,7 @@ const ProfileForm = ({
 				error={errors?.email?.message}
 				registration={register('email')}
 			/>
-			<InputField
+			<TextareaField
 				label="Bio"
 				error={errors?.bio?.message}
 				registration={register('bio')}
