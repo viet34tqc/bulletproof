@@ -90,7 +90,6 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
 	async function logoutFn() {
 		storage.clearToken();
-		window.location.assign(window.location.origin as unknown as string);
 	}
 
 	const loginMutation = useMutation({
@@ -110,6 +109,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 	const logoutMutation = useMutation({
 		mutationFn: logoutFn,
 		onSuccess: () => {
+			setUser(null as never);
 			queryClient.clear();
 		},
 	});

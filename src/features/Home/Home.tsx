@@ -7,15 +7,16 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
 	const navigate = useNavigate();
 	const { user } = useAuth();
-	const handleStart = () => {
-		navigate('/auth/login');
-	};
 
 	useEffect(() => {
 		if (user) {
 			navigate('/dashboard');
 		}
 	}, [user]);
+
+	const handleStart = () => {
+		navigate('/auth/login');
+	};
 
 	return (
 		<div className="grid place-items-center h-[100vh] bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

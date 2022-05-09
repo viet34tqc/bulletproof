@@ -3,10 +3,11 @@ import { Menu, Transition } from '@headlessui/react';
 import { UserIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const UserNavigation = () => {
 	const { logoutMutation } = useAuth();
+	const navigate = useNavigate();
 
 	const userNavigation = [
 		{ name: 'Your Profile', to: './profile' },
@@ -14,7 +15,11 @@ const UserNavigation = () => {
 			name: 'Sign out',
 			to: '',
 			onClick: () => {
-				logoutMutation.mutate();
+				logoutMutation.mutate(null as never, {
+					onSuccess: () => {
+						navigate('/');
+					},
+				});
 			},
 		},
 	];
