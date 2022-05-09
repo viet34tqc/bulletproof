@@ -1,7 +1,10 @@
 import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
+import SelectField from '@/components/Form/SelectField';
+import Spinner from '@/components/Spinner/Spinner';
 import { useAuth } from '@/context/AuthContext';
 import AuthLayout from '@/features/Auth/components/AuthLayout';
+import { useTeams } from '@/features/Teams/api/getTeams';
 import { Switch } from '@headlessui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
@@ -15,6 +18,7 @@ export interface RegisterValues {
 	firstName: string;
 	lastName: string;
 	password: string;
+	teamId: string;
 }
 
 const schema = yup.object({
@@ -22,12 +26,19 @@ const schema = yup.object({
 	password: yup.string().required(),
 	firstName: yup.string().required(),
 	lastName: yup.string().required(),
+	teamId: yup.string().min(1),
 });
 
 const Register = () => {
 	const [chooseTeam, setChooseTeam] = useState(false);
 	const navigate = useNavigate();
 	const { isRegistering, registerMutation } = useAuth();
+
+	const { data: teams, isLoading: isLoadingTeams } = useTeams({
+		config: {
+			enabled: chooseTeam, // Only run this query if chooseTeam is available
+		},
+	});
 	const {
 		register,
 		handleSubmit,
@@ -49,7 +60,10 @@ const Register = () => {
 
 	return (
 		<AuthLayout title="Register new account">
-			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="flex flex-col gap-4 child:text-[14px]"
+			>
 				<InputField
 					type="email"
 					label="Email"
@@ -93,6 +107,24 @@ const Register = () => {
 						<Switch.Label className="ml-4">Join Existing Team</Switch.Label>
 					</div>
 				</Switch.Group>
+
+				{chooseTeam &&
+					(isLoadingTeams ? (
+						<Spinner size="sm" />
+					) : (
+						teams && (
+							<SelectField
+								options={teams.map(team => {
+									return {
+										value: team.id,
+										name: team.name,
+									};
+								})}
+								error={errors.teamId?.message}
+								registration={register('teamId')}
+							></SelectField>
+						)
+					))}
 
 				<Button isLoading={isRegistering} type="submit" className="w-full">
 					Register

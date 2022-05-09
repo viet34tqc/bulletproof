@@ -42,7 +42,10 @@ const Login = () => {
 
 	return (
 		<AuthLayout title="Login to your account">
-			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="flex flex-col gap-4 child:text-[14px]"
+			>
 				<InputField
 					type="email"
 					label="Email"
