@@ -3,6 +3,7 @@ import Table from '@/components/Table/Table';
 import React from 'react';
 import { User } from '../../types/User';
 import { useUsers } from './api/getUsers';
+import DeleteUserButton from './components/DeleteUserButton';
 
 const Users = () => {
 	const { data: users, isLoading } = useUsers();
@@ -43,6 +44,11 @@ const Users = () => {
 							name: 'Created At',
 							field: 'createdAt',
 							Cell: ({ entry: { createdAt } }) => <span>{createdAt}</span>,
+						},
+						{
+							name: '',
+							field: 'id',
+							Cell: ({ entry: { id } }) => <DeleteUserButton id={id} />,
 						},
 					]}
 				/>

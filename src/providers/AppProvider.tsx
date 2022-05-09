@@ -17,7 +17,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 			<QueryClientProvider client={queryClient}>
 				<AuthContextProvider>
 					<BrowserRouter>{children}</BrowserRouter>
-					<ToastContainer />
+					<ToastContainer autoClose={2000} />
 				</AuthContextProvider>
 			</QueryClientProvider>
 		</Suspense>
