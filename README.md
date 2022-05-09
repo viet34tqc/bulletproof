@@ -10,12 +10,16 @@ I have to use craco to override the webpack.config.js of CRA, otherwise the abso
 
 - Routes: I decided to seperate routes into 3 categories instead of 2: authentication routes, protected routes and public routes (which can be homepage, blog...)
 - Use `mutation` instead of `mutationAync` to handle the POST request (login, register). For more details: <https://tkdodo.eu/blog/mastering-mutations-in-react-query>
-- Using react-toastify instead of storing the error into global state
+- Slightly different folder structure: I categorize features by both pages and features.
+- Using `yup` for form validation instead of `zod`
+- Simplify components: I have removed some components I think is redundant, like: FormDrawer...
+- Remove React Helmet: if you want to apply SEO on your web app, try another solutions like NextJS
+- Using react-toastify instead of storing the notifications into global state
 - Packages are up to date: CRA 5, Tailwind CSS 3.
 
 ## API
 
-This repo using msw and mswjs/data to mock up a server. Unfortunately, these two packages won't work well with CRA 5 because CRA 5 has removed polyfill of some modules, such as 'http', 'https', 'stream'...So, I need to install those polifills package as the error instruction and set it up in the craco.config.js (which is used to override CRA webpack.config.js)
+This repo using msw and mswjs/data to mock up a server. Unfortunately, these two packages won't work well with CRA 5 because CRA 5 has removed polyfill of some modules, such as 'http', 'https', 'stream'...So, I need to install those polifills as the error instruction and set it up in the craco.config.js (which is used to override CRA webpack.config.js)
 
 Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 
@@ -37,7 +41,7 @@ Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 
 ## Styles
 
-- HeadlessUI (work perfectly with TailwindCSS)
+- HeadlessUI (works perfectly with TailwindCSS)
 - HeroIcons
 - TailwindCSS
 
