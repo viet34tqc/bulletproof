@@ -6,7 +6,7 @@ interface ConfirmationDialogProps {
 	triggerButton: ReactElement;
 	confirmButton: ReactElement;
 	title: string;
-	children: any;
+	children: React.ReactNode;
 }
 
 const ConfirmationDialog = ({

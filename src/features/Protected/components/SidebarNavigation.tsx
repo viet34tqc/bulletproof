@@ -1,3 +1,4 @@
+import { ROLES, useAuthorization } from '@/core/authorization';
 import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
@@ -9,15 +10,18 @@ type SideNavigationItem = {
 };
 
 const SidebarNavigation = () => {
+	const { checkAccess } = useAuthorization();
 	const navigation = [
 		{ name: 'Dashboard', to: '.', icon: HomeIcon },
 		{ name: 'Discussions', to: './discussions', icon: FolderIcon },
-		{
+	] as SideNavigationItem[];
+	if (checkAccess([ROLES.ADMIN])) {
+		navigation.push({
 			name: 'Users',
 			to: './users',
 			icon: UsersIcon,
-		},
-	] as SideNavigationItem[];
+		});
+	}
 	return (
 		<>
 			{navigation.map((item, index) => (
