@@ -1,3 +1,4 @@
+import { ArchiveIcon } from '@heroicons/react/outline';
 import React, { ReactElement } from 'react';
 
 type TableColumnProps<Entry> = {
@@ -16,6 +17,15 @@ const Table = <Entry extends { id: string }>({
 	data,
 	columns,
 }: TableProps<Entry>) => {
+	if (!data?.length) {
+		return (
+			<div className="bg-white text-gray-500 h-80 flex justify-center items-center flex-col">
+				<ArchiveIcon className="h-16 w-16" />
+				<p>No Entries Found</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className="shadow overflow-auto border-gray-200 sm:rounded-lg">
 			<table className="w-full divide-y divide-gray-200">
