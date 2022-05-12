@@ -37,6 +37,7 @@ const Button = ({
 				sizes[size],
 				className
 			)}
+			disabled={isLoading}
 			{...props}
 		>
 			{isLoading && <Spinner size="sm" className="text-current" />}

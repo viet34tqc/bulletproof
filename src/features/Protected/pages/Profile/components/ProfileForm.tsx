@@ -79,7 +79,7 @@ const ProfileForm = ({
 				error={errors?.bio?.message}
 				registration={register('bio')}
 			/>
-			<Button type="submit" size="sm">
+			<Button type="submit" size="sm" isLoading={updateProfile.isLoading}>
 				Update
 			</Button>
 		</form>

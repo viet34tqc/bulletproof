@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/core/axios';
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 
 export const deleteDiscussion = (id: string) => {
 	return axiosInstance.delete(`/discussions/${id}`);
@@ -14,8 +15,9 @@ export const useDeleteDiscussion = () => {
 				queryClient.setQueryData('discussions', context.previousDiscussions);
 			}
 		},
-        onSuccess: () => {
-            queryClient.invalidateQueries('discussions')
-        }
+		onSuccess: () => {
+			queryClient.invalidateQueries('discussions');
+			toast('Delete Discussion successfully');
+		},
 	});
 };

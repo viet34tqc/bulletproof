@@ -2,7 +2,7 @@ import SidebarNavigation from './SidebarNavigation';
 
 const Sidebar = () => {
 	return (
-		<aside className="flex flex-col h-[100vh]">
+		<aside className="flex flex-col min-h-screen">
 			<div className="text-center p-4 bg-gray-900 font-[32px] text-white">
 				Bullet
 			</div>

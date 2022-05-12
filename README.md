@@ -63,3 +63,12 @@ User login or register => If success, a token is assigned and saved in localStor
 If the user refresh the page or go to other page, the app will check if the user is logged in and he can use this token for authentication.
 
 AuthContext will always run first, so does the query for loading user. It's this query to check if the user is logged in.
+
+
+## Button actions
+
+- Click -> loading
+  - Success:
+    - drawer or dialog remove
+    - invalidateQuery
+    - toast

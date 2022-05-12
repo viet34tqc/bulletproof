@@ -58,7 +58,7 @@ const DiscussionForm = ({
 				error={errors?.body?.message}
 				registration={register('body')}
 			/>
-			<Button type="submit" size="sm">
+			<Button type="submit" size="sm" isLoading={createDiscussion.isLoading}>
 				Create
 			</Button>
 		</form>

@@ -12,11 +12,7 @@ const DeleteDiscussionButton = ({ id }: DeleteDiscussionButtonProps) => {
 	const deleteDiscussionMutation = useDeleteDiscussion();
 
 	const handleDeleteDiscussion = (id: string) => {
-		deleteDiscussionMutation.mutate(id, {
-			onSuccess: () => {
-				toast('Delete Discussion successfully');
-			},
-		});
+		deleteDiscussionMutation.mutate(id);
 	};
 
 	return (

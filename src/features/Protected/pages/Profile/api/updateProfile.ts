@@ -1,6 +1,5 @@
-import { useAuth } from '@/context/AuthContext';
 import { axiosInstance } from '@/core/axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 export type UpdateProfileDTO = {
 	email: string;
 	firstName: string;
@@ -12,12 +11,11 @@ export const updateProfile = (data: UpdateProfileDTO) => {
 };
 
 export const useUpdateProfile = () => {
-	const { refetchUser } = useAuth();
-
+	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: updateProfile,
 		onSuccess() {
-			refetchUser();
+			queryClient.invalidateQueries('auth-user');
 		},
 	});
 };
