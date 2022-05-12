@@ -1,10 +1,11 @@
 import Button from '@/components/Button/Button';
 import InputField from '@/components/Form/InputField';
 import TextareaField from '@/components/Form/TextareaField';
-import { useAuth } from '@/context/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
+import { useCreateDiscussion } from '../api/createDiscussion';
 
 export interface DiscussionValues {
 	title: string;
@@ -21,7 +22,7 @@ const DiscussionForm = ({
 }: {
 	setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-	const { user } = useAuth();
+	const createDiscussion = useCreateDiscussion();
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +31,17 @@ const DiscussionForm = ({
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = async (data: DiscussionValues) => {};
+	const onSubmit = async (data: DiscussionValues) => {
+		createDiscussion.mutate(data, {
+			onSuccess() {
+				setIsOpen && setIsOpen(false);
+				toast('Successfully update');
+			},
+			onError: (error: any) => {
+				toast(error.response.data.message);
+			},
+		});
+	};
 	return (
 		<form
 			className="child:mt-8 child:text-sm"

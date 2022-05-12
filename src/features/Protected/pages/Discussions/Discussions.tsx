@@ -8,7 +8,7 @@ const Discussions = () => {
 	return (
 		<>
 			<h1 className="mb-4">Discussions</h1>
-			<div className="flex justify-end">
+			<div className="flex justify-end mb-4">
 				<Drawer
 					title="Update Profile"
 					triggerButton={

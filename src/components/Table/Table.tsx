@@ -44,7 +44,7 @@ const Table = <Entry extends { id: string }>({
 				<tbody>
 					{data.map((entry, entryIndex) => (
 						<tr
-							key={entry?.id}
+							key={entry.id + entryIndex}
 							className={entryIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'}
 						>
 							{columns.map(({ Cell, field, name }, columnIndex) => (

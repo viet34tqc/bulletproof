@@ -14,9 +14,12 @@ export const createDiscussion = (
 };
 
 export const useCreateDiscussion = () => {
-    const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: createDiscussion,
+		onSuccess: () => {
+			queryClient.invalidateQueries('discussions');
+		},
 		onError: (_, __, context: any) => {
 			if (context?.previousDiscussions) {
 				queryClient.setQueryData('discussions', context.previousDiscussions);

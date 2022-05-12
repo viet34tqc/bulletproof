@@ -1,8 +1,9 @@
+import { Link } from '@/components/Link/Link';
 import Spinner from '@/components/Spinner/Spinner';
 import Table from '@/components/Table/Table';
-import { Link } from 'react-router-dom';
 import { useGetDiscussions } from '../api/getDiscussions';
 import { Discussion } from '../types/discussion';
+import DeleteDiscussionButton from './DeleteDiscussionButton';
 
 const DiscussionList = () => {
 	const { data: discussions, isLoading } = useGetDiscussions();
@@ -33,10 +34,17 @@ const DiscussionList = () => {
 					},
 				},
 				{
-					name: '',
+					name: 'view',
 					field: 'id',
 					Cell({ entry: { id } }) {
 						return <Link to={`./${id}`}>View</Link>;
+					},
+				},
+				{
+					name: '',
+					field: 'id',
+					Cell({ entry: { id } }) {
+						return <DeleteDiscussionButton id={id} />;
 					},
 				},
 			]}
