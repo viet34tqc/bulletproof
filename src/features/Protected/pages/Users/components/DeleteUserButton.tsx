@@ -2,7 +2,6 @@ import Button from '@/components/Button/Button';
 import ConfirmationDialog from '@/components/ConfirmationDialog/ConfirmationDialog';
 import { useAuth } from '@/context/AuthContext';
 import React from 'react';
-import { toast } from 'react-toastify';
 import { useDeleteUser } from '../api/deleteUser';
 
 type DeleteUserButtonProps = {
@@ -11,16 +10,12 @@ type DeleteUserButtonProps = {
 
 const DeleteUserButton = ({ id }: DeleteUserButtonProps) => {
 	const { user } = useAuth();
-	if (user?.id === id) return null;
-
 	const deleteUserMutation = useDeleteUser();
 
+	if (user?.id === id) return null;
+
 	const handleDeleteUser = (id: string) => {
-		deleteUserMutation.mutate(id, {
-			onSuccess: () => {
-				toast('Delete user successfully');
-			},
-		});
+		deleteUserMutation.mutate(id);
 	};
 
 	return (

@@ -1,7 +1,6 @@
 import Button from '@/components/Button/Button';
 import ConfirmationDialog from '@/components/ConfirmationDialog/ConfirmationDialog';
 import React from 'react';
-import { toast } from 'react-toastify';
 import { useDeleteDiscussion } from '../api/deleteDiscussion';
 
 type DeleteDiscussionButtonProps = {

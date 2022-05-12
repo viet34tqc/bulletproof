@@ -10,7 +10,7 @@ const AuthRoute = () => {
 		if (user) {
 			navigate('/dashboard');
 		}
-	}, [user]);
+	}, [user, navigate]);
 	return <Outlet />;
 };
 
