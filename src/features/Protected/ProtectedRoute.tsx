@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import DashboardLayout from './components/DashboardLayout';
 
-const Protected = () => {
+const ProtectedRoute = () => {
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
@@ -19,4 +19,4 @@ const Protected = () => {
 	);
 };
 
-export default Protected;
+export default ProtectedRoute;

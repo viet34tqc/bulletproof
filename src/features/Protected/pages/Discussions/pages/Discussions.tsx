@@ -1,8 +1,7 @@
 import Button from '@/components/Button/Button';
 import Drawer from '@/components/Drawer/Drawer';
-import React from 'react';
-import DiscussionForm from './components/DiscussionForm';
-import DiscussionList from './components/DiscussionList';
+import DiscussionForm from '../components/DiscussionForm';
+import DiscussionList from '../components/DiscussionList';
 
 const Discussions = () => {
 	return (

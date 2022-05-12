@@ -2,7 +2,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const Auth = () => {
+const AuthRoute = () => {
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
@@ -14,4 +14,4 @@ const Auth = () => {
 	return <Outlet />;
 };
 
-export default Auth;
+export default AuthRoute;

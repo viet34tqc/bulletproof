@@ -8,7 +8,7 @@ I have to use craco to override the webpack.config.js of CRA, otherwise the abso
 
 ## Difference from bulletproof-react
 
-- Routes: I decided to seperate routes into 3 categories instead of 2: authentication routes, protected routes and public routes (which can be homepage, blog...)
+- Routes: I decided to seperate routes into 3 categories instead of 2: authentication routes, protected routes and public routes (which can be homepage, blog...). If the route has its own child route, it will have a component name like: <AuthRoute> to render the <Outlet>
 - Use `mutation` instead of `mutationAync` to handle the POST request (login, register). For more details: <https://tkdodo.eu/blog/mastering-mutations-in-react-query>
 - Slightly different folder structure: I categorize features by both pages and features.
 - Using `yup` for form validation instead of `zod`
@@ -36,8 +36,11 @@ Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 - protected routes:
   - dashboard/
     - discussions
+      - /id
     - users
     - profile
+
+If the route has its own child route, it will have a component name like: <AuthRoute> to render the <Outlet>
 
 ## Styles
 
