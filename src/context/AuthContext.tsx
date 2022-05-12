@@ -1,5 +1,5 @@
 import Spinner from '@/components/Spinner/Spinner';
-import { getUser } from '@/features/Auth/api/getUser';
+import { getCurrentUser } from '@/features/Auth/api/getUser';
 import { LoginCredentialsDTO, loginUser } from '@/features/Auth/api/login';
 import {
 	RegisterCredentialsDTO,
@@ -59,7 +59,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 	});
 	async function loadUser() {
 		if (storage.getToken()) {
-			const data = await getUser();
+			const data = await getCurrentUser();
 			return data;
 		}
 		return null;
