@@ -1,5 +1,6 @@
 import Spinner from '@/components/Spinner/Spinner';
 import Table from '@/components/Table/Table';
+import { formatDate } from '@/utils/format';
 import React from 'react';
 import { User } from '../../types/User';
 import { useUsers } from './api/getUsers';
@@ -43,7 +44,9 @@ const Users = () => {
 						{
 							name: 'Created At',
 							field: 'createdAt',
-							Cell: ({ entry: { createdAt } }) => <span>{createdAt}</span>,
+							Cell: ({ entry: { createdAt } }) => (
+								<>{formatDate(createdAt)}</>
+							),
 						},
 						{
 							name: '',

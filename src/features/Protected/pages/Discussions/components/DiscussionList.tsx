@@ -1,6 +1,7 @@
 import { Link } from '@/components/Link/Link';
 import Spinner from '@/components/Spinner/Spinner';
 import Table from '@/components/Table/Table';
+import { formatDate } from '@/utils/format';
 import { useGetDiscussions } from '../api/getDiscussions';
 import { Discussion } from '../types/discussion';
 import DeleteDiscussionButton from './DeleteDiscussionButton';
@@ -30,7 +31,7 @@ const DiscussionList = () => {
 					name: 'Created At',
 					field: 'createdAt',
 					Cell({ entry: { createdAt } }) {
-						return <span>{createdAt}</span>;
+						return <>{formatDate(createdAt)}</>;
 					},
 				},
 				{
