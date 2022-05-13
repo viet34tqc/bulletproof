@@ -75,3 +75,7 @@ AuthContext will always run first, so does the query for loading user. It's this
     - drawer or dialog remove
     - invalidateQuery
     - toast
+
+## TODO
+
+<https://tkdodo.eu/blog/effective-react-query-keys>
