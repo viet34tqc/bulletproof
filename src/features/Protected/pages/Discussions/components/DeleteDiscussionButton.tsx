@@ -10,7 +10,7 @@ type DeleteDiscussionButtonProps = {
 const DeleteDiscussionButton = ({ id }: DeleteDiscussionButtonProps) => {
 	const deleteDiscussionMutation = useDeleteDiscussion();
 
-	const handleDeleteDiscussion = (id: string) => {
+	const handleDeleteDiscussion = () => {
 		deleteDiscussionMutation.mutate(id);
 	};
 
@@ -22,7 +22,7 @@ const DeleteDiscussionButton = ({ id }: DeleteDiscussionButtonProps) => {
 				<Button
 					type="button"
 					isLoading={deleteDiscussionMutation.isLoading}
-					onClick={() => handleDeleteDiscussion(id)}
+					onClick={handleDeleteDiscussion}
 					className="bg-red-600"
 				>
 					Delete

@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/core/axios';
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import { Comment } from '../types/comment';
 
 export type CreateCommentDTO = {
@@ -15,8 +16,9 @@ export const useCreateComment = (discussionId: string) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: createComment,
-		onSuccess: () => {
-			queryClient.invalidateQueries(['comments', discussionId]);
+		onSuccess: async () => {
+			await queryClient.invalidateQueries(['comments', discussionId]);
+			toast('Successfully update');
 		},
 		onError: (_, __, context: any) => {
 			if (context?.previousDiscussions) {

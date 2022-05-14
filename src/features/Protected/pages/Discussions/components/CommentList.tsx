@@ -3,6 +3,7 @@ import { formatDate } from '@/utils/format';
 import { ArchiveIcon } from '@heroicons/react/outline';
 import { useGetComments } from '../api/getComments';
 import { Comment } from '../types/comment';
+import DeleteCommentButton from './DeleteCommentButton';
 
 const CommentList = ({ discussionId }: { discussionId: string }) => {
 	const { data: comments, isLoading } = useGetComments(discussionId);
@@ -30,21 +31,32 @@ const CommentList = ({ discussionId }: { discussionId: string }) => {
 	return (
 		<ul>
 			{comments.map(comment => (
-				<CommentItem key={comment.id} comment={comment} />
+				<CommentItem
+					key={comment.id}
+					comment={comment}
+					discussionId={discussionId}
+				/>
 			))}
 		</ul>
 	);
 };
 
-const CommentItem = ({ comment }: { comment: Comment }) => {
+const CommentItem = ({
+	comment,
+	discussionId,
+}: {
+	comment: Comment;
+	discussionId: string;
+}) => {
 	return (
-		<li className="flex justify-between shadow p-4 bg-white">
+		<li className="flex justify-between shadow p-4 bg-white items-start">
 			<div>
 				<p className="font-medium text-sm mb-8">
 					{formatDate(comment.createdAt)}
 				</p>
-				<p>comment.body</p>
+				<p>{comment.body}</p>
 			</div>
+			<DeleteCommentButton id={comment.id} discussionId={discussionId} />
 		</li>
 	);
 };

@@ -41,7 +41,6 @@ const CommentForm = ({
 			{
 				onSuccess() {
 					setIsOpen && setIsOpen(false);
-					toast('Successfully update');
 				},
 				onError: (error: any) => {
 					toast(error.response.data.message);
