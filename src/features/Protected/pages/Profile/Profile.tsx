@@ -10,7 +10,7 @@ const Profile = () => {
 		<>
 			<h1 className="mb-4">Profile</h1>
 			<div className="bg-white rounded-md shadow">
-				<header className="flex flex-wrap justify-between items-center p-4">
+				<header className="flex justify-between items-start p-4">
 					<div>
 						<p className="mb-3 font-medium text-[18px]">User Information</p>
 						<p className="text-gray-500 text-[14px]">
@@ -20,7 +20,7 @@ const Profile = () => {
 					<Drawer
 						title="Update Profile"
 						triggerButton={
-							<Button className="text-[14px]">
+							<Button className="text-[14px]" size="sm">
 								<PencilIcon width={14} />
 								Update Profile
 							</Button>

@@ -50,7 +50,7 @@ const Table = <Entry extends { id: string }>({
 							{columns.map(({ Cell, field, name }, columnIndex) => (
 								<td
 									key={name + columnIndex}
-									className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+									className="px-6 py-4 sm:whitespace-nowrap text-sm font-medium text-gray-900"
 								>
 									{Cell ? (
 										<Cell entry={entry} />
