@@ -1,7 +1,9 @@
+import Authorization from '@/components/Authorization/Authorization';
 import Button from '@/components/Button/Button';
 import Drawer from '@/components/Drawer/Drawer';
 import PurifyHTML from '@/components/PurifyHTML/PurifyHTML';
 import Spinner from '@/components/Spinner/Spinner';
+import { ROLES } from '@/core/authorization';
 import { formatDate } from '@/utils/format';
 import { PencilAltIcon } from '@heroicons/react/outline';
 import { useParams } from 'react-router-dom';
@@ -26,15 +28,15 @@ const SingleDiscussion = () => {
 
 	return (
 		<>
-			<header>
-				<h1 className="mb-2">{discussion.title}</h1>
-				<p className="text-xs font-semibold">
-					{formatDate(discussion.createdAt)}
-				</p>
-			</header>
+			<header className="flex justify-between mb-4">
+				<div>
+					<h1 className="mb-2">{discussion.title}</h1>
+					<p className="text-xs font-semibold">
+						{formatDate(discussion.createdAt)}
+					</p>
+				</div>
 
-			<div className="flex justify-end mb-8">
-				<div className="flex justify-end mb-4">
+				<Authorization allowedRoles={[ROLES.ADMIN]}>
 					<Drawer
 						title="Update discussion"
 						triggerButton={
@@ -46,8 +48,8 @@ const SingleDiscussion = () => {
 					>
 						<DiscussionForm discussion={discussion} />
 					</Drawer>
-				</div>
-			</div>
+				</Authorization>
+			</header>
 
 			<div className="bg-white shadow overflow-hidden sm:rounded-lg mb-[64px]">
 				<div className="px-4 py-5 sm:px-6">

@@ -39,6 +39,7 @@ const Register = () => {
 			enabled: chooseTeam, // Only run this query if chooseTeam is available
 		},
 	});
+	console.log('teams', teams);
 	const {
 		register,
 		handleSubmit,

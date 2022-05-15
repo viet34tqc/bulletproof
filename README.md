@@ -26,9 +26,11 @@ Remember to run `npx msw init ./public --save` to create mockServiceWorker file.
 ## Routes
 
 - public routes
+
   - Home
 
 - auth routes:
+
   - auth/
     - login/
     - register/
@@ -67,14 +69,17 @@ If the user refresh the page or go to other page, the app will check if the user
 
 AuthContext will always run first, so does the query for loading user. It's this query to check if the user is logged in.
 
-
 ## Button actions
 
 - Click -> loading
-  - Success:
+  - then wait for Success:
     - drawer or dialog remove
-    - invalidateQuery
+    - wait for invalidateQuery
     - toast
+
+## Authorization
+
+We have 2 authorization criterias: roles and policies
 
 ## TODO
 

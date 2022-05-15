@@ -14,8 +14,8 @@ export const useUpdateProfile = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: updateProfile,
-		onSuccess() {
-			queryClient.invalidateQueries('auth-user');
+		async onSuccess() {
+			await queryClient.invalidateQueries('auth-user');
 		},
 	});
 };

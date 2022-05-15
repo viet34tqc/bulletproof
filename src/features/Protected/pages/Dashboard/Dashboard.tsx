@@ -24,6 +24,13 @@ const Dashboard = () => {
 					<li>Delete all comments</li>
 				</ul>
 			)}
+
+			{user?.role === 'USER' && (
+				<ul className="my-4 list-inside list-disc">
+					<li>Create comments on discussions</li>
+					<li>Delete own comments</li>
+				</ul>
+			)}
 		</div>
 	);
 };

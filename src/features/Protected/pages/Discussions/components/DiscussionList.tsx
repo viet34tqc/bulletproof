@@ -1,6 +1,8 @@
+import Authorization from '@/components/Authorization/Authorization';
 import { Link } from '@/components/Link/Link';
 import Spinner from '@/components/Spinner/Spinner';
 import Table from '@/components/Table/Table';
+import { ROLES } from '@/core/authorization';
 import { formatDate } from '@/utils/format';
 import { useGetDiscussions } from '../api/getDiscussions';
 import { Discussion } from '../types/discussion';
@@ -35,7 +37,7 @@ const DiscussionList = () => {
 					},
 				},
 				{
-					name: 'view',
+					name: '',
 					field: 'id',
 					Cell({ entry: { id } }) {
 						return <Link to={`./${id}`}>View</Link>;
@@ -45,7 +47,11 @@ const DiscussionList = () => {
 					name: '',
 					field: 'id',
 					Cell({ entry: { id } }) {
-						return <DeleteDiscussionButton id={id} />;
+						return (
+							<Authorization allowedRoles={[ROLES.ADMIN]}>
+								<DeleteDiscussionButton id={id} />
+							</Authorization>
+						);
 					},
 				},
 			]}

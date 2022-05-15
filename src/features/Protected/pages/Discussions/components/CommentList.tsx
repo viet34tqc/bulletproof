@@ -1,11 +1,15 @@
+import Authorization from '@/components/Authorization/Authorization';
 import Spinner from '@/components/Spinner/Spinner';
+import { useAuth } from '@/context/AuthContext';
+import { POLICIES } from '@/core/authorization';
+import { User } from '@/features/Protected/types/User';
 import { formatDate } from '@/utils/format';
 import { ArchiveIcon } from '@heroicons/react/outline';
 import { useGetComments } from '../api/getComments';
-import { Comment } from '../types/comment';
 import DeleteCommentButton from './DeleteCommentButton';
 
 const CommentList = ({ discussionId }: { discussionId: string }) => {
+	const { user } = useAuth();
 	const { data: comments, isLoading } = useGetComments(discussionId);
 
 	if (isLoading) {
@@ -29,35 +33,23 @@ const CommentList = ({ discussionId }: { discussionId: string }) => {
 		);
 
 	return (
-		<ul>
+		<ul className="grid gap-3">
 			{comments.map(comment => (
-				<CommentItem
-					key={comment.id}
-					comment={comment}
-					discussionId={discussionId}
-				/>
+				<li className="flex justify-between shadow p-4 bg-white items-start">
+					<div>
+						<p className="font-medium text-sm mb-8">
+							{formatDate(comment.createdAt)}
+						</p>
+						<p>{comment.body}</p>
+					</div>
+					<Authorization
+						policyCheck={POLICIES['comment:delete'](user as User, comment)}
+					>
+						<DeleteCommentButton id={comment.id} discussionId={discussionId} />
+					</Authorization>
+				</li>
 			))}
 		</ul>
-	);
-};
-
-const CommentItem = ({
-	comment,
-	discussionId,
-}: {
-	comment: Comment;
-	discussionId: string;
-}) => {
-	return (
-		<li className="flex justify-between shadow p-4 bg-white items-start">
-			<div>
-				<p className="font-medium text-sm mb-8">
-					{formatDate(comment.createdAt)}
-				</p>
-				<p>{comment.body}</p>
-			</div>
-			<DeleteCommentButton id={comment.id} discussionId={discussionId} />
-		</li>
 	);
 };
 
