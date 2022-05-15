@@ -24,8 +24,8 @@ const UserNavigation = () => {
 		},
 	];
 	return (
-		<Menu as="div" className="ml-3 relative">
-			<Menu.Button className="max-w-xs  bg-gray-200 p-2 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+		<Menu as="div" className="ml-3 py-3 relative">
+			<Menu.Button className="max-w-xs bg-gray-200 p-2 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 				<span className="sr-only">Open user menu</span>
 				<UserIcon className="h-8 w-8 rounded-full" />
 			</Menu.Button>
