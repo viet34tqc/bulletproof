@@ -12,6 +12,9 @@ const ProtectedRoute = () => {
 			navigate('/auth/login');
 		}
 	}, [user, navigate]);
+
+	if (!user) return null;
+	
 	return (
 		<DashboardLayout>
 			<Outlet />
