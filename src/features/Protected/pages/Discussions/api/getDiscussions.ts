@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/core/axios';
 import { useQuery } from 'react-query';
+import { discussionKeys } from '../queryKeys';
 import { Discussion } from '../types/discussion';
 
 export const getDiscussions = (): Promise<Discussion[]> => {
@@ -8,7 +9,7 @@ export const getDiscussions = (): Promise<Discussion[]> => {
 
 export const useGetDiscussions = () => {
 	return useQuery({
-		queryKey: ['discussions'],
+		queryKey: discussionKeys.all(),
 		queryFn: getDiscussions,
 	});
 };

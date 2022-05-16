@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/core/axios';
 import { useQuery } from 'react-query';
+import { commentKeys } from '../queryKeys';
 import { Comment } from '../types/comment';
 
 export const getComments = (discussionId: string): Promise<Comment[]> => {
@@ -12,7 +13,7 @@ export const getComments = (discussionId: string): Promise<Comment[]> => {
 
 export const useGetComments = (discussionId: string) => {
 	return useQuery({
-		queryKey: ['comments', discussionId],
+		queryKey: commentKeys.all(discussionId),
 		queryFn: () => getComments(discussionId),
 	});
 };
