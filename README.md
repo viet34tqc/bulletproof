@@ -2,6 +2,10 @@
 
 This is the simplified version of the famous bulletproof-react. I rewrite it just for learning how to use some packages and the work flow, so there are no testing and other stuff related to deployment.
 
+## Demo
+
+<https://bulletproof-three.vercel.app/>
+
 ## Setup
 
 I have to use craco to override the webpack.config.js of CRA, otherwise the absolute path won't work (This only happens when you use CRA v5)
