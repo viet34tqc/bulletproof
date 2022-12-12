@@ -44,7 +44,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 	// This is much like setUser using setState,
 	// but instead of saving the user in the state, we are saving it using useQuery with a key
 	// This query runs every time the app is mounted.
-	// If the token is saved before (when you login or register), it will return that user.
+	// If the token is saved before (when you login or register), it calls API to get that user.
 	const {
 		data: user,
 		error,
@@ -56,6 +56,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 	} = useQuery({
 		queryKey,
 		queryFn: loadUser,
+		staleTime: Infinity,
 	});
 	async function loadUser() {
 		if (storage.getToken()) {

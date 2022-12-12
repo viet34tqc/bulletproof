@@ -9,7 +9,13 @@ type AppProviderProps = {
 	children: React.ReactNode;
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 20 * 1000, // 20s
+		},
+	},
+});
 
 const AppProvider = ({ children }: AppProviderProps) => {
 	return (

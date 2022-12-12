@@ -37,7 +37,7 @@ const DiscussionList = () => {
 					},
 				},
 				{
-					name: '',
+					name: 'view',
 					field: 'id',
 					Cell({ entry: { id } }) {
 						return <Link to={`./${id}`}>View</Link>;

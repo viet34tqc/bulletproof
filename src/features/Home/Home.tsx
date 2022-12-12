@@ -1,22 +1,19 @@
 import Button from '@/components/Button/Button';
 import { useAuth } from '@/context/AuthContext';
 import { HomeIcon } from '@heroicons/react/outline';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Home = () => {
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
-	useEffect(() => {
-		if (user) {
-			navigate('/dashboard');
-		}
-	}, [user]);
-
 	const handleStart = () => {
 		navigate('/auth/login');
 	};
+
+	if (user) {
+		return <Navigate to="/dashboard" replace />;
+	}
 
 	return (
 		<div className="grid place-items-center h-[100vh] bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,5 @@
 import { axiosInstance } from '@/core/axios';
 import { useMutation, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
 import { Discussion } from '../types/discussion';
 
 export type updateDiscussionDTO = {

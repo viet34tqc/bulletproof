@@ -1,23 +1,22 @@
-import { lazy } from 'react';
+import loadable from '@loadable/component';
 import { Navigate } from 'react-router-dom';
-
-const ProtectedRoute = lazy(
+const ProtectedRoute = loadable(
 	() => import('@/features/Protected/ProtectedRoute')
 );
-const Dashboard = lazy(
+const Dashboard = loadable(
 	() => import('@/features/Protected/pages/Dashboard/Dashboard')
 );
-const Users = lazy(() => import('@/features/Protected/pages/Users/Users'));
-const DiscussionsRoute = lazy(
+const Users = loadable(() => import('@/features/Protected/pages/Users/Users'));
+const DiscussionsRoute = loadable(
 	() => import('@/features/Protected/pages/Discussions/DiscussionsRoute')
 );
-const Discussions = lazy(
+const Discussions = loadable(
 	() => import('@/features/Protected/pages/Discussions/pages/Discussions')
 );
-const SingleDiscussion = lazy(
+const SingleDiscussion = loadable(
 	() => import('@/features/Protected/pages/Discussions/pages/SingleDiscussion')
 );
-const Profile = lazy(
+const Profile = loadable(
 	() => import('@/features/Protected/pages/Profile/Profile')
 );
 

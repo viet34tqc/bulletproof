@@ -1,4 +1,4 @@
-	import React from 'react';
+import React from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -12,7 +12,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 			<Sidebar />
 			<div className="flex flex-col">
 				<Header />
-				<div className="bg-gray-100 flex-1 p-4 sm:p-8 overflow-y-auto">{children}</div>
+				<div className="bg-gray-100 flex-1 p-4 sm:p-8 overflow-y-auto">
+					{children}
+				</div>
 			</div>
 		</div>
 	);

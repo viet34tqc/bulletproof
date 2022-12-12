@@ -11,5 +11,6 @@ export const useGetDiscussions = () => {
 	return useQuery({
 		queryKey: discussionKeys.all(),
 		queryFn: getDiscussions,
+		staleTime: Infinity,
 	});
 };

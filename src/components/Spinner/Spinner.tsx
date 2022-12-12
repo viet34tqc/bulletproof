@@ -17,7 +17,7 @@ export type SpinnerProps = {
 	className?: string;
 };
 
-type Spinner = {
+type TSpinner = {
 	variant?: keyof typeof variants;
 	size?: keyof typeof sizes;
 	className?: string;
@@ -27,7 +27,7 @@ const Spinner = ({
 	className = '',
 	variant = 'primary',
 	size = 'md',
-}: Spinner) => {
+}: TSpinner) => {
 	return (
 		<>
 			<svg

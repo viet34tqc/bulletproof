@@ -6,6 +6,7 @@
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.8.8",
+    "@loadable/component": "^5.15.2",
     "@mswjs/data": "^0.10.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
@@ -71,6 +72,7 @@
   "devDependencies": {
     "@types/dompurify": "^2.3.3",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/loadable__component": "^5.13.4",
     "autoprefixer": "^10.4.4",
     "faker": "5.5.3",
     "postcss": "^8.4.12",
