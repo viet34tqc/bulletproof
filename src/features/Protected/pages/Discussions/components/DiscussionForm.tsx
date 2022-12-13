@@ -10,6 +10,7 @@ import {
 	updateDiscussionDTO,
 	useUpdateDiscussion,
 } from '../api/updateDiscussion';
+import { CREATE_DISCUSSION_SUCCESSFULLY } from '../constants';
 import { Discussion } from '../types/discussion';
 
 export interface DiscussionValues {
@@ -48,7 +49,7 @@ const DiscussionForm = ({
 		createDiscussion.mutate(data, {
 			onSuccess() {
 				setIsOpen && setIsOpen(false);
-				toast('Successfully update');
+				toast(CREATE_DISCUSSION_SUCCESSFULLY);
 			},
 			onError: (error: any) => {
 				toast(error.response.data.message);
