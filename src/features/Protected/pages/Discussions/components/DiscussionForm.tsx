@@ -10,7 +10,10 @@ import {
 	updateDiscussionDTO,
 	useUpdateDiscussion,
 } from '../api/updateDiscussion';
-import { CREATE_DISCUSSION_SUCCESSFULLY } from '../constants';
+import {
+	CREATE_DISCUSSION_SUCCESSFULLY,
+	UPDATE_DISCUSSION_SUCCESSFULLY,
+} from '../constants';
 import { Discussion } from '../types/discussion';
 
 export interface DiscussionValues {
@@ -31,7 +34,7 @@ const DiscussionForm = ({
 	discussion?: Discussion;
 }) => {
 	const createDiscussion = useCreateDiscussion();
-	const updateDiscussion = useUpdateDiscussion();
+	const updateDiscussion = useUpdateDiscussion(discussion?.id as string);
 
 	const {
 		register,
@@ -63,7 +66,7 @@ const DiscussionForm = ({
 			{
 				onSuccess() {
 					setIsOpen && setIsOpen(false);
-					toast('Discussion updated');
+					toast(UPDATE_DISCUSSION_SUCCESSFULLY);
 				},
 				onError: (error: any) => {
 					toast(error.response.data.message);
