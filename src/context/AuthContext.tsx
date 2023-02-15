@@ -43,8 +43,10 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
 	// This is much like setUser using setState,
 	// but instead of saving the user in the state, we are saving it using useQuery with a key
-	// This query runs every time the app is mounted.
-	// If the token is saved before (when you login or register), it calls API to get that user.
+	// This query runs every time the app is mounted to get the user data when we reload the page after login
+	// Because the token is saved before (when you login or register), it can calls API to get that user.
+	// This is kind of a workaround of session.
+	
 	const {
 		data: user,
 		error,
